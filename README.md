@@ -13,3 +13,9 @@ infoemhack hackathon project
 + Django framework
 + ? web-chat for Django
 + TensorFlow/Keras
+
+## Usefull links
+[Диалоги из Adventure Time (англ)]
+
+[Диалоги из Adventure Time (англ)]: <https://en.wikiquote.org/wiki/Adventure_Time>
+
