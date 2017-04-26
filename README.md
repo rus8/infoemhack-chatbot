@@ -14,10 +14,10 @@ infoemhack hackathon project
 + TensorFlow/Keras
 
 ## Usefull links
-[Диалоги из Adventure Time (англ)]
-[Пишем бота для Telegram на языке Python]
-[Telegram Bot API]
+- [Диалоги из Adventure Time (англ)]
+- [Пишем бота для Telegram на языке Python]
+- [Telegram Bot API]
 
-[Диалоги из Adventure Time (англ)]: <https://en.wikiquote.org/wiki/Adventure_Time>
-[Пишем бота для Telegram на языке Python]: <https://groosha.gitbooks.io/telegram-bot-lessons/content/>
-[Telegram Bot API]: <https://core.telegram.org/bots/api>
+[Диалоги из Adventure Time (англ)]: <https://en.wikiquote.org/wiki/Adventure_Time> 
+[Пишем бота для Telegram на языке Python]: <https://groosha.gitbooks.io/telegram-bot-lessons/content/> 
+[Telegram Bot API]: <https://core.telegram.org/bots/api> 
