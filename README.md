@@ -10,12 +10,12 @@ infoemhack hackathon project
 
 ## Required technologies
 + ? web server on Linux(Ubuntu flavor)
-+ Django framework
-+ ? web-chat for Django
++ Telegram Bot API
 + TensorFlow/Keras
 
 ## Usefull links
 [Диалоги из Adventure Time (англ)]
 
 [Диалоги из Adventure Time (англ)]: <https://en.wikiquote.org/wiki/Adventure_Time>
-
+[Пишем бота для Telegram на языке Python]: <https://groosha.gitbooks.io/telegram-bot-lessons/content/>
+[Telegram Bot API] <https://core.telegram.org/bots/api>
