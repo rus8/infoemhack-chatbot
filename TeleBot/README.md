@@ -1,7 +1,7 @@
-# infoemhack-chatbot
+# Telegram Bot
 BarabulkaBot for Telegram
 
-##Requirements
+## Requirements
 [pyTelegramBotAPI github]
 
 [pyTelegramBotAPI github]: https://github.com/eternnoir/pyTelegramBotAPI
