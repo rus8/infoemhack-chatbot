@@ -13,6 +13,15 @@ infoemhack hackathon project
 + Telegram Bot API
 + TensorFlow/Keras
 
+## How to make your Telegram Bot:
++ Write to @BotFather in Telegram to create your own Telegram Bot: write /newbot and follow instructions
++ Copy token, that @BotFather gave you, to telebot/config.py
++ To start Telegram Bot use:
+
+```
+$ python3 bot.py
+```
+
 ## Usefull links
 - [Диалоги из Adventure Time (англ)]
 - [Пишем бота для Telegram на языке Python]
