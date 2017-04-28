@@ -26,6 +26,9 @@ dissatisfacted_stickers = ['CAADAgADegcAAlOx9wPdYZQdsjeJ1QI', 'CAADAgADfAcAAlOx9
                             'CAADAgADcAcAAlOx9wPvD5GVsIF2awI', 'CAADAgADZgcAAlOx9wP_l3UsB3QgqgI', 'CAADAgADawADCcWmA1VTC_qsRfCDAg', 'CAADAgADcwADCcWmAyzf617bF45OAg',
                             'CAADAgADZAADCcWmAzEQWoj97GwoAg', 'CAADAgADVgADCcWmA3t13Jtwo52vAg', 'CAADAgADdAADCcWmA7q-xty48LXYAg', 'CAADAgADUwADCcWmA2mcT2RpHaCuAg']
 
+replaces = {"n\'t": " not", "\'ll": " will", "\'re": " are", " he\'s": " he is", " she\'s": " she is", " it\'s": " it is", " there\'s": " there is", 
+            "\'em": " them", "i\'m": "i am", " who\'s": " who is", " what\'s": " what is", " that\'s": " that is"}
+
 @bot.message_handler(commands=['start', 'help'])
 def handle_start_help(message):
     print('['+ message.from_user.username + '] : '+ message.text)
@@ -47,13 +50,27 @@ def say_I_know_your_location(message): # Название функции не и
     	print('['+ message.from_user.username + '] : '+ message.text)
     	bot.send_message(message.chat.id, 'Я знаю где ты живешь, '+ message.from_user.first_name)'''
 
+def preprocessing(strr):
+    strr = strr.lower()
+    print(strr)
+    for key, value in replaces.items():
+        #print(key)
+        if key in strr:
+            print(key+' найдена в строке')
+            strr = strr.replace(key, value)
+        elif key[0]==' ' and strr.find(key[1:])==0:
+            print(key[1:]+' найдена в строке')
+            strr = strr.replace(key[1:], value[1:])
+    print(strr)
+    return strr
+
 # answer message with Adventure Time 
 @bot.message_handler(content_types=["text"])
 def answer_adventure_time(message): # Название функции не играет никакой роли, в принципе
     if message.text:
         print('['+ message.from_user.username + '] : '+ message.text)
         mess = 'hello, dear user_name, i like you user_name'
-        question = message.text.lower()
+        question = preprocessing(message.text)      
         #mess = execute.decode_line(sess, model, enc_vocab, rev_dec_vocab, question)
         if '_UNK' in mess:
             print(mess)
