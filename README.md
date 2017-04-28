@@ -30,3 +30,4 @@ $ python3 bot.py
 [Диалоги из Adventure Time (англ)]: <https://en.wikiquote.org/wiki/Adventure_Time> 
 [Пишем бота для Telegram на языке Python]: <https://groosha.gitbooks.io/telegram-bot-lessons/content/> 
 [Telegram Bot API]: <https://core.telegram.org/bots/api> 
+[Основа для tf-бота]: <https://github.com/tensorflow/models/tree/master/tutorials/rnn/translate>
