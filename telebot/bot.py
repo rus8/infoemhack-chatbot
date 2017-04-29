@@ -4,8 +4,8 @@ import telebot
 import tensorflow as tf
 import sys, os  
 import random
-sys.path.append("../tensorflow_chatbot")
-#import execute
+sys.path.append("../tf_chatbot")
+import execute
 
 '''
 Init seq2seq model
@@ -13,8 +13,8 @@ Init seq2seq model
     2. Create decode_line function that takes message as input
 '''
 
-#sess = tf.Session()
-#sess, model, enc_vocab, rev_dec_vocab = execute.init_session(sess, conf='seq2seq_serve.ini')
+sess = tf.Session()
+sess, model, enc_vocab, rev_dec_vocab = execute.init_session(sess, conf='../tf_chatbot/seq2seq.ini')
 
 '''
 Init Telegram Bot with token from @BotFather
@@ -52,16 +52,12 @@ def say_I_know_your_location(message): # Название функции не и
 
 def preprocessing(strr):
     strr = strr.lower()
-    print(strr)
     for key, value in replaces.items():
         #print(key)
         if key in strr:
-            print(key+' найдена в строке')
             strr = strr.replace(key, value)
         elif key[0]==' ' and strr.find(key[1:])==0:
-            print(key[1:]+' найдена в строке')
             strr = strr.replace(key[1:], value[1:])
-    print(strr)
     return strr
 
 # answer message with Adventure Time 
@@ -71,9 +67,8 @@ def answer_adventure_time(message): # Название функции не иг�
         print('['+ message.from_user.username + '] : '+ message.text)
         mess = 'hello, dear user_name, i like you user_name'
         question = preprocessing(message.text)      
-        #mess = execute.decode_line(sess, model, enc_vocab, rev_dec_vocab, question)
+        mess = execute.decode_line(sess, model, enc_vocab, rev_dec_vocab, question)
         if '_UNK' in mess:
-            print(mess)
             mess = 'I don\'t understand you'
             bot.send_sticker(message.chat.id, dissatisfacted_stickers[random.randint(0, 10)])        
         if 'user_name' in mess:
