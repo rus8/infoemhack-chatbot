@@ -6,12 +6,11 @@ infoemhack hackathon project
 
 ## Principal architecture
 * Backend: RNN chat bot
-* Frontend: web application 
+* Frontend: web application / massenger 
 
-## Required technologies
-+ ? web server on Linux(Ubuntu flavor)
+## Software components
 + Telegram Bot API
-+ TensorFlow/Keras
++ TensorFlow
 
 ## How to make your Telegram Bot:
 + Write to @BotFather in Telegram to create your own Telegram Bot: write /newbot and follow instructions
