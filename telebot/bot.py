@@ -31,7 +31,7 @@ replaces = {"n\'t": " not", "\'ll": " will", "\'re": " are", " he\'s": " he is",
 
 @bot.message_handler(commands=['start', 'help'])
 def handle_start_help(message):
-    print('['+ message.from_user.username + '] : '+ message.text)
+    print('['+ message.from_user.first_name + '] : '+ message.text)
     mess = ('Hello, it\'s Adventure Time Chatbot, if you\'re sad, please write me and I make your life better \n \n Authors: \n Ruslan Aminev, \n Alina Belyaeva, \n Violetta Mishechkina, \n Vitaliy Reut,  \n code: https://github.com/rus8/infoemhack-chatbot')
     bot.send_message(message.chat.id, mess)
     if message.text == '/start':
@@ -40,7 +40,7 @@ def handle_start_help(message):
 @bot.message_handler(content_types=['sticker'])
 def repeat_sticker(message): # Название функции не играет никакой роли, в принципе
     if message.sticker:
-    	print('['+ message.from_user.username + '] : '+ message.sticker.file_id)
+    	print('['+ message.from_user.first_name + '] : '+ message.sticker.file_id)
     	#bot.send_message(message.chat.id, 'Получи назад АХАХАХАХ')
     	bot.send_sticker(message.chat.id, message.sticker.file_id)
 
@@ -66,7 +66,7 @@ def postprocessing(strr, message):
     #if 'user_name' in strr:
     #    strr = strr.replace('user_name', message.from_user.first_name) # замена собственных имен на твое имя
     symbols = ['.', '?', '!',',']
-    adventure_heroes = [' finn ', ' jake ', ' bubblegum ', ' bmo ', ' rainicorn ', ' fionna ',  ' princess ', ' king ', ' marceline ', ' lady ', ' gunther ']
+    adventure_heroes = [' finn ', ' jake ', ' bubblegum ', ' bmo ', ' rainicorn ', ' fionna ',  ' princess ', ' king ', ' marceline ', ' lady ', ' gunther ', ' joshua ']
     b = []
     strr = strr.replace(' i ', ' I ')
     a = strr.strip().split()
@@ -97,7 +97,7 @@ def postprocessing(strr, message):
 @bot.message_handler(content_types=["text"])
 def answer_adventure_time(message): # Название функции не играет никакой роли, в принципе
     if message.text:
-        print('['+ message.from_user.username + '] : '+ message.text)
+        print('['+ message.from_user.first_name + '] : '+ message.text)
         question = preprocessing(message.text)
         answ = execute.decode_line(sess, model, enc_vocab, rev_dec_vocab, question)
         if '_UNK' in answ or len(answ)<=1:
