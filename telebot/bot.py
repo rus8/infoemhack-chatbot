@@ -78,7 +78,7 @@ def postprocessing(strr, message):
                 b.append(' '+ message.from_user.first_name)
             else:
                 b.append(' ' + a[i])
-        elif (a[i] in symbols and  not b[len(b)-1] in symbols):
+        elif (len(b)>0 and a[i] in symbols and  not b[len(b)-1] in symbols):
             b.append(a[i])
 
     strr = ''.join(b)
