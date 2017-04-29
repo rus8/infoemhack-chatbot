@@ -84,7 +84,8 @@ def create_vocabulary(vocabulary_path, data_path, max_vocabulary_size,
 
 
 def initialize_vocabulary(vocabulary_path):
-
+  cur_dir = os.path.dirname(os.path.abspath(__file__))
+  vocabulary_path = os.path.join(cur_dir, vocabulary_path)
   if gfile.Exists(vocabulary_path):
     rev_vocab = []
     with gfile.GFile(vocabulary_path, mode="r") as f:

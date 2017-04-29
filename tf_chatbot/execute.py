@@ -107,7 +107,11 @@ def create_model(session, forward_only):
       model.saver.restore(session,gConfig['pretrained_model'])
       return model
 
-  ckpt = tf.train.get_checkpoint_state(gConfig['working_directory'])
+  cur_dir = os.path.dirname(os.path.abspath(__file__))
+  ckpt_dir = os.path.join(cur_dir ,gConfig['working_directory'])
+
+  ckpt = tf.train.get_checkpoint_state(ckpt_dir)
+  # print(ckpt_dir, (tf.__version__ > "0.12"))
   # the checkpoint filename has changed in recent versions of tensorflow
   checkpoint_suffix = ""
   if tf.__version__ > "0.12":
@@ -140,9 +144,10 @@ def train():
     print ("Reading development and training data (limit: %d)."
            % gConfig['max_train_data_size'])
     dev_set = read_data(enc_dev, dec_dev)
+
     train_set = read_data(enc_train, dec_train, gConfig['max_train_data_size'])
     train_bucket_sizes = [len(train_set[b]) for b in xrange(len(_buckets))]
-    hirain_total_size = float(sum(train_bucket_sizes))
+    train_total_size = float(sum(train_bucket_sizes))
 
     # A bucket scale is a list of increasing numbers from 0 to 1 that we'll use
     # to select a bucket. Length of [scale[i], scale[i+1]] is proportional to
@@ -274,9 +279,11 @@ def init_session(sess, conf='seq2seq.ini'):
     model = create_model(sess, True)
     model.batch_size = 1  # We decode one sentence at a time.
 
+    cur_dir = os.path.dirname(os.path.abspath(__file__))
+
     # Load vocabularies.
-    enc_vocab_path = os.path.join(gConfig['working_directory'],"vocab%d.enc" % gConfig['enc_vocab_size'])
-    dec_vocab_path = os.path.join(gConfig['working_directory'],"vocab%d.dec" % gConfig['dec_vocab_size'])
+    enc_vocab_path = os.path.join(cur_dir, gConfig['working_directory'],"joint%d.voc" % gConfig['enc_vocab_size'])
+    dec_vocab_path = os.path.join(cur_dir, gConfig['working_directory'],"joint%d.voc" % gConfig['dec_vocab_size'])
 
     enc_vocab, _ = data_utils.initialize_vocabulary(enc_vocab_path)
     _, rev_dec_vocab = data_utils.initialize_vocabulary(dec_vocab_path)
@@ -285,7 +292,7 @@ def init_session(sess, conf='seq2seq.ini'):
 
 def decode_line(sess, model, enc_vocab, rev_dec_vocab, sentence):
     # Get token-ids for the input sentence.
-    token_ids = data_utils.sentence_to_token_ids(tf.compat.as_bytes(sentence), enc_vocab)
+    token_ids = data_utils.sentence_to_token_ids(sentence, enc_vocab)
 
     # Which bucket does it belong to?
     bucket_id = min([b for b in xrange(len(_buckets)) if _buckets[b][0] > len(token_ids)])
