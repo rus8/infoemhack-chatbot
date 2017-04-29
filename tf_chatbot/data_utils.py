@@ -42,7 +42,8 @@ _WORD_SPLIT = re.compile("([.,!?\"':;)(])")
 _DIGIT_RE = re.compile(r"\d")
 
 replaces = {"n\'t": " not", "\'ll": " will", "\'re": " are", " he\'s": " he is", " she\'s": " she is", " it\'s": " it is", " there\'s": " there is",
-            "\'em": " them", "i\'m": "i am", " who\'s": " who is", " what\'s": " what is", " that\'s": " that is"}
+            "\'em": " them", "i\'m": "i am", " who\'s": " who is", " what\'s": " what is", " that\'s": " that is",
+            "--": " - ", "i\'d": "i would", "\'cause": "because"}
 
 def basic_tokenizer(sentence):
     """Very basic tokenizer: split the sentence into a list of tokens."""

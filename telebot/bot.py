@@ -14,7 +14,7 @@ Init seq2seq model
 '''
 
 sess = tf.Session()
-sess, model, enc_vocab, rev_dec_vocab = execute.init_session(sess, conf='../tf_chatbot/seq2seq_small.ini')
+sess, model, enc_vocab, rev_dec_vocab = execute.init_session(sess, conf='../tf_chatbot/seq2seq.ini')
 
 '''
 Init Telegram Bot with token from @BotFather
@@ -41,7 +41,7 @@ def handle_start_help(message):
 def repeat_sticker(message): # Название функции не играет никакой роли, в принципе
     if message.sticker:
     	print('['+ message.from_user.username + '] : '+ message.sticker.file_id)
-    	bot.send_message(message.chat.id, 'Получи назад АХАХАХАХ')
+    	#bot.send_message(message.chat.id, 'Получи назад АХАХАХАХ')
     	bot.send_sticker(message.chat.id, message.sticker.file_id)
 
 '''@bot.message_handler(content_types=["text"])
@@ -66,8 +66,9 @@ def postprocessing(strr, message):
     #if 'user_name' in strr:
     #    strr = strr.replace('user_name', message.from_user.first_name) # замена собственных имен на твое имя
     symbols = ['.', '?', '!',',']
-    adventure_heroes = [' fin ', ' jake ', ' bubblegum ', ' bmo ']
+    adventure_heroes = [' finn ', ' jake ', ' bubblegum ', ' bmo ', ' rainicorn ', ' fionna ',  ' princess ', ' king ', ' marceline ', ' lady ', ' gunther ']
     b = []
+    strr = strr.replace(' i ', ' I ')
     a = strr.strip().split()
     '''if len(a) == 1:
         b = a
@@ -82,12 +83,13 @@ def postprocessing(strr, message):
             b.append(a[i])
 
     strr = ''.join(b)
-    strr = strr[1].upper() + strr[2:]
-    strr = strr.replace(' i ', ' I ')
-    for i in range(0, len(strr)):
-        if strr[i] in symbols[:3]:
-            if i+2 < len(strr)-1:
-                strr = strr[:i+2] + strr[i+2].upper() + strr[i+3:]
+    if len(strr)>1 :
+        strr = strr[1].upper() + strr[2:]
+        for i in range(0, len(strr)):
+            if strr[i] in symbols[:3]:
+                if i + 2 < len(strr) - 1:
+                    strr = strr[:i + 2] + strr[i + 2].upper() + strr[i + 3:]
+
 
     return strr
 
@@ -98,7 +100,7 @@ def answer_adventure_time(message): # Название функции не иг�
         print('['+ message.from_user.username + '] : '+ message.text)
         question = preprocessing(message.text)
         answ = execute.decode_line(sess, model, enc_vocab, rev_dec_vocab, question)
-        if '_UNK' in answ:
+        if '_UNK' in answ or len(answ)<=1:
             answ = "I don't understand you"
             bot.send_sticker(message.chat.id, dissatisfacted_stickers[random.randint(0, 10)])
         else:
