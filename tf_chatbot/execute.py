@@ -128,7 +128,7 @@ def create_model(session, forward_only):
 def train():
   # prepare dataset
   print("Preparing data in %s" % gConfig['working_directory'])
-  enc_train, dec_train, enc_dev, dec_dev, _ = data_utils.prepare_custom_data(gConfig['working_directory'],gConfig['phrases'],gConfig['train_enc'],gConfig['train_dec'],gConfig['test_enc'],gConfig['test_dec'],gConfig['enc_vocab_size'])
+  enc_train, dec_train, enc_dev, dec_dev, _ = data_utils.prepare_custom_data(gConfig['working_directory'],gConfig['phrases'], gConfig['at_phrases'],gConfig['train_enc'],gConfig['train_dec'],gConfig['test_enc'],gConfig['test_dec'],gConfig['enc_vocab_size'])
 
   # Only allocate 2/3 of the gpu memory to allow for running gpu-based predictions while training:
   gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.666)
