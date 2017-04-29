@@ -5,7 +5,7 @@ import tensorflow as tf
 import sys, os  
 import random
 sys.path.append("../tf_chatbot")
-#import execute
+import execute
 
 '''
 Init seq2seq model
@@ -13,8 +13,8 @@ Init seq2seq model
     2. Create decode_line function that takes message as input
 '''
 
-#sess = tf.Session()
-#sess, model, enc_vocab, rev_dec_vocab = execute.init_session(sess, conf='../tf_chatbot/seq2seq.ini')
+sess = tf.Session()
+sess, model, enc_vocab, rev_dec_vocab = execute.init_session(sess, conf='../tf_chatbot/seq2seq.ini')
 
 '''
 Init Telegram Bot with token from @BotFather
@@ -66,7 +66,7 @@ def postprocessing(strr, message):
     #if 'user_name' in strr:
     #    strr = strr.replace('user_name', message.from_user.first_name) # замена собственных имен на твое имя
     symbols = ['.', '?', '!',',']
-    adventure_heroes = [' fin ', ' jake ', ' bubblegum ', ' bmo ']
+    adventure_heroes = [' finn ', ' jake ', ' bubblegum ', ' bmo ', ' rainicorn ', ' fionna ',  ' princess ', ' king ', ' marceline ', ' lady ', ' gunther ']
     b = []
     a = strr.strip().split()
     '''if len(a) == 1:
@@ -96,8 +96,8 @@ def postprocessing(strr, message):
 def answer_adventure_time(message): # Название функции не играет никакой роли, в принципе
     if message.text:
         print('['+ message.from_user.username + '] : '+ message.text)
-        answ = preprocessing(message.text)
-        #answ = execute.decode_line(sess, model, enc_vocab, rev_dec_vocab, question)
+        question = preprocessing(message.text)
+        answ = execute.decode_line(sess, model, enc_vocab, rev_dec_vocab, question)
         if '_UNK' in answ:
             answ = "I don't understand you"
             bot.send_sticker(message.chat.id, dissatisfacted_stickers[random.randint(0, 10)])
